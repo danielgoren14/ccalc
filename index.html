@@ -3,38 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
+    <title>Unified Calculator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            margin-top: 50px;
+            height: 100vh;
+            margin: 0;
         }
         .calculator {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
         }
         input, select, button {
             padding: 5px;
             font-size: 16px;
+            text-align: center;
+        }
+        input.result-box {
+            width: 100px;
         }
     </style>
 </head>
 <body>
     <div class="calculator">
-        <input type="number" id="number1" placeholder="Enter first number">
+        <input type="text" id="number1" placeholder="0" class="result-box">
         <select id="operator">
             <option value="+">+</option>
             <option value="-">-</option>
             <option value="*">*</option>
         </select>
-        <input type="number" id="number2" placeholder="Enter second number">
+        <input type="text" id="number2" placeholder="0" class="result-box">
         <button onclick="calculate()">=</button>
-        <div class="input" id="result"></div>
+        <input type="text" id="result" placeholder="Result" class="result-box" readonly>
     </div>
+
     <script>
         function calculate() {
             const number1 = parseFloat(document.getElementById('number1').value);
@@ -44,7 +53,7 @@
             let result;
 
             if (isNaN(number1) || isNaN(number2)) {
-                result = "Please enter valid numbers.";
+                result = "Error";
             } else {
                 switch (operator) {
                     case '+':
@@ -57,11 +66,11 @@
                         result = number1 * number2;
                         break;
                     default:
-                        result = "Invalid operator.";
+                        result = "Error";
                 }
             }
 
-            document.getElementById('result').textContent = `Result: ${result}`;
+            document.getElementById('result').value = result;
         }
     </script>
 </body>
